@@ -1,18 +1,16 @@
-How to develop Hackpad under Docker
-===================================
+# How to develop Hackpad under Docker
 
 If you'd like to develop Hackpad on Docker, these instructions are for you.
 
 This will let you edit this repository and see your changes reflected in the docker image.
 
-Getting it running
--------------------
+## Getting it running
 
 1. Obviously, if you haven't already, you'll need to install [Docker](https://docs.docker.com/installation/).
 
 2. Build the image, pull in dependencies and run the container:
 
-        docker-compose up
+        docker-compose run -p 9000:9000 -e TOP_DOMAINS="<my_domain>" hackpad
 
    The available environment variables are:
 
@@ -93,4 +91,22 @@ Getting it running
 
 
 You're all set!  You should be able to edit the Hackpad source code and the docker container will track those changes.
+
+## Production
+By default, the Docker Compose file will configure Caddy as an SSL-enabled
+front-end proxy, automatically generating an SSL certificate.
+
+To make this work:
+
+1. Make sure the requested (sub)domain is set up to refer to the public host.
+2. Setup the certificates by interactively running Caddy explicitly, once:
+
+    docker-compose run -e TOP_DOMAINS="<my_domain>" caddy
+
+This should start the whole shebang and Caddy will likely ask for your email
+address to setup ACME with Let's Encrypt. You will only have to do this once.
+
+After, simply run:
+
+    docker-compose up
 
