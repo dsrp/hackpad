@@ -1,0 +1,31 @@
+{%TOP_DOMAINS%}
+
+gzip
+
+header / {
+    # Enable HTTP Strict Transport Security (HSTS) to force clients to always
+    # connect via HTTPS (do not use if only testing)
+    Strict-Transport-Security "max-age=31536000; includeSubdomains;"
+    # Enable cross-site filter (XSS) and tell browser to block detected attacks
+    X-XSS-Protection "1; mode=block"
+    # Prevent some browsers from MIME-sniffing a response away from the declared Content-Type
+    X-Content-Type-Options "nosniff"
+    # Disallow the site to be rendered within a frame (clickjacking protection)
+    X-Frame-Options "DENY"
+
+    # Hackpad pro_or_main_header
+    X-Hackpad-Server-Id "Pro"
+}
+
+proxy / hackpad:9000 {
+    transparent
+    header_upstream X-Scheme {scheme}
+
+    except /solr
+}
+
+# TODO: Enable plugin in build
+# cache {
+#     match_path /static/compressed
+#    default_max_age 800m
+# }

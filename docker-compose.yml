@@ -1,9 +1,20 @@
 version: '3'
 services:
+  caddy:
+    build: contrib/caddy
+    volumes:
+      - certs:/root/.caddy
+    ports:
+      - 80:80
+      - 443:443
+    depends_on:
+      - hackpad
+    environment:
+      - TOP_DOMAINS
   hackpad:
     build: .
     ports:
-      - "9000:9000"
+      - 9000:9000
     depends_on:
       - mysql
     environment:
@@ -45,3 +56,4 @@ services:
 volumes:
   db:
   hackpad:
+  certs:
