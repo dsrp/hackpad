@@ -1208,15 +1208,14 @@ function getPicById(id, large) {
 
       var photoUrl = null;
       if (r && getAccountHasPhotoByEmail(r) && !doesUserWantGravatar(r)) {
-
-      if (appjet.config.s3BucketAvatarsFolder != false) {
-          var bucketFolder = appjet.config.s3BucketAvatarsFolder;
-      } else {
-          var bucketFolder = '';
-      }
+        if (appjet.config.s3BucketAvatarsFolder != false) {
+            var bucketFolder = appjet.config.s3BucketAvatarsFolder;
+        } else {
+            var bucketFolder = '';
+        }
 
         var cacheBustingToken =
-        photoUrl = s3.getURL("s3Bucket", bucketFolder+r.email, true/*http*/)+"?"+Date.now();
+        photoUrl = s3.getURL("s3Bucket", bucketFolder+r.email, false/*https*/)+"?"+Date.now();
       } else if (r && r.fullName == "The Hackpad Team") {
         photoUrl = "/static/img/hackpad-logo.png";
       } else if (r && r.fbid && !doesUserWantGravatar(r)) {
