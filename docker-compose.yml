@@ -10,7 +10,7 @@ services:
     depends_on:
       - hackpad
     environment:
-      - TOP_DOMAINS
+      - CADDY_DOMAINS
   hackpad:
     build: .
     depends_on:

@@ -1,4 +1,4 @@
-{%TOP_DOMAINS%}
+{%CADDY_DOMAINS%}
 
 gzip
 
