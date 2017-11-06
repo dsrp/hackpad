@@ -11,6 +11,8 @@ services:
       - hackpad
     environment:
       - CADDY_DOMAINS
+    restart: unless-stopped
+    command: --conf /etc/Caddyfile --log stdout -ca 'https://acme-staging.api.letsencrypt.org/directory'
   hackpad:
     build: .
     depends_on:
