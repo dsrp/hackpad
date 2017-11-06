@@ -26,6 +26,8 @@ import("etherpad.pro.pro_pad_db");
 
 import("etherpad.utils.renderTemplateAsString");
 
+import("etherpad.debug.dmesg");
+
 var MAX_TITLE_LENGTH = 128;
 
 function _doWithProPadLock(domainId, localPadId, func) {
@@ -39,8 +41,15 @@ function accessProPad(globalPadId, fn) {
   if (!domainId) {
     throw Error("not a pro pad: "+globalPadId);
   }
+
   var localPadId = padutils.globalToLocalId(globalPadId);
+
   var padRecord = pro_pad_db.getSingleRecord(domainId, localPadId);
+
+
+  if (!padRecord) {
+    dmesg("padRecord not found for: domainId="+domainId+", localPadId="+localPadId);
+  }
 
   return _doWithProPadLock(domainId, localPadId, function() {
     var isDirty = false;
