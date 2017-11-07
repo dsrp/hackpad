@@ -34,7 +34,6 @@ services:
       - SMTP_USER
       - SMTP_PASS
       - PERSONALIZE_FOOTER
-      - TOP_DOMAINS
       - ADMIN_EMAILS
       - CUSTOM_EMAIL_ADDRESS
       - SUPPORT_EMAIL_ADDRESS
