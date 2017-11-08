@@ -57,6 +57,11 @@ services:
     image: namshi/smtp
     environment:
       - MAILNAME
+      - SMARTHOST_ADDRESS
+      - SMARTHOST_USER
+      - SMARTHOST_PASSWORD
+      - SMARTHOST_ALIASES
+      - SMARTHOST_PORT
     volumes:
       - mailspool:/var/spool/exim
 
