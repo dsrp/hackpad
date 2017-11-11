@@ -1,5 +1,9 @@
 {%CADDY_DOMAINS%}
 
+tls {%CADDY_EMAIL%} {
+    ca {%CADDY_CA%}
+}
+
 gzip
 
 header / {
