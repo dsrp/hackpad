@@ -42,7 +42,7 @@ services:
       - CANONICAL_DOMAIN
       - REDIRECT_HOME_TO
     volumes:
-      - hackpad:/home/hackpad/hackpad/etherpad/data
+      - hackpad:/home/hackpad/etherpad/data
     restart: unless-stopped
   mysql:
     image: mysql:5.7
